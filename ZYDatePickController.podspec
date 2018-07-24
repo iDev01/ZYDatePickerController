@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.license = 'MIT'
   s.summary = 'A DatePickController that likes the UIAlertController.'
   s.homepage = 'https://github.com/NSLogxiaoyu3/ZYDatePickerController'
-  s.author = { 'iDev_01' => 'ideveloper_mahao@163.com' }
+  s.author = { 'NSLogxiaoyu3' => 'ideveloper_mahao@163.com' }
   s.source = { :git => 'git@github.com:NSLogxiaoyu3/ZYDatePickerController.git', :tag => "v#{s.version}" }
   s.source_files = 'ZYDatePickerController/*.{h,m}'
   s.frameworks = 'Foundation', 'UIKit'
