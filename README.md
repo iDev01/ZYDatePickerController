@@ -16,6 +16,27 @@ You can use block or delegate.
 pod "ZYDatePickerController"
 ```
 
+## Usage
+
+It is quite easy to use, you can use this by two methods, one is for block, another is for delegate.
+
+### block
+
+``` objc
+
+__weak typeof(self) weakSelf = self;
+ZYDatePickerController *datePickController = [[ZYDatePickerController alloc] initWithMessage:NSLocalizedString(@"pleaseChooseDate", nil) dateFormat:@"yyyy-MM-dd" handler:^(NSString *dateString) {
+    __strong typeof(weakSelf) strongSelf = weakSelf;
+    strongSelf.textField.text = dateString;
+}];
+[self presentViewController:datePickController animated:YES completion:nil];
+
+```
+
+### delegate
+
+the delegate example comes sooner
+
 ## License
 
 MIT LICENSE
