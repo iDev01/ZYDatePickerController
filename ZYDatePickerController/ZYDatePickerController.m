@@ -135,8 +135,10 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         make.left.equalTo(self.view).offset(10);
         make.right.equalTo(self.view).offset(-10);
         if (@available(iOS 11.0, *)) {
-            if ([UIDevice currentDevice].model ) {
-
+            if ([UIScreen mainScreen].bounds.size.width == 375.f && [UIScreen mainScreen].bounds.size.height == 812.f) {
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            } else {
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-10);
             }
             make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
         } else {
