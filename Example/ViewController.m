@@ -24,7 +24,7 @@
 
 - (IBAction)chooseDateButtonClicked:(id)sender {
     __weak typeof(self) weakSelf = self;
-    ZYDatePickerController *datePickController = [[ZYDatePickerController alloc] initWithMessage:@"请选择日期" dateFormat:@"yyyy-MM-dd" handler:^(NSString *dateString) {
+    ZYDatePickerController *datePickController = [[ZYDatePickerController alloc] initWithMessage:NSLocalizedString(@"pleaseChooseDate", nil) dateFormat:@"yyyy-MM-dd" handler:^(NSString *dateString) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.textField.text = dateString;
     }];

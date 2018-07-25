@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+
+
+  Created by zeroyear on 2018/7/26.
+  Copyright © 2018 iDev_01. All rights reserved.
+*/
+
+"confirm" = "Confirm";
+"cancel" = "Cancel";

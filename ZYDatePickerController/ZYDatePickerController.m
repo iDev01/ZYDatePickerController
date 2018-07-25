@@ -10,6 +10,7 @@
 #import "ZYPresentAnimator.h"
 #import "ZYDismissAnimator.h"
 #import <Masonry/Masonry.h>
+#import "NSBundle+ZYDatePickerController.h"
 
 typedef void(^DatePickerHandler)(NSString *dateString);
 
@@ -77,7 +78,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         self.confirmButton.titleLabel.font = [UIFont fontWithName:@".SFUIDisplay" size:20];
         [self.confirmButton setBackgroundColor:[UIColor whiteColor]];
         [self.confirmButton setTitleColor:[UIColor colorWithRed:0 green:0.478 blue:1 alpha:1] forState:UIControlStateNormal];
-        [self.confirmButton setTitle:NSLocalizedString(@"confirm", nil) forState:UIControlStateNormal];
+        [self.confirmButton setTitle:[NSBundle zy_localizedStringForKey:@"confirm"]  forState:UIControlStateNormal];
         [self.confirmButton addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
         self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.cancelButton.layer.cornerRadius = 13;
@@ -85,7 +86,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         self.cancelButton.titleLabel.font = [UIFont fontWithName:@".SFUIDisplay-Semibold" size:20];
         [self.cancelButton setBackgroundColor:[UIColor whiteColor]];
         [self.cancelButton setTitleColor:[UIColor colorWithRed:0 green:0.478 blue:1 alpha:1] forState:UIControlStateNormal];
-        [self.cancelButton setTitle:NSLocalizedString(@"cancel", nil) forState:UIControlStateNormal];
+        [self.cancelButton setTitle:[NSBundle zy_localizedStringForKey:@"cancel"]  forState:UIControlStateNormal];
         [self.cancelButton addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
 
         [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
