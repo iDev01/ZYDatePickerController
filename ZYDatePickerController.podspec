@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
   s.source_files = 'ZYDatePickerController/*.{h,m}'
   s.resource     = 'ZYDatePickerController/ZYDatePickerController.bundle'
   s.frameworks = 'Foundation', 'UIKit'
+  s.ios.deployment_target = '9.0'
   s.requires_arc = true
   s.dependency 'Masonry'
 end
