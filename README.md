@@ -7,7 +7,9 @@ You can use block or delegate.
 
 ## Screenshots
 
-<img width="200px" src="https://github.com/NSLogxiaoyu3/ZYDatePickerController/blob/master/Screenshots.png" />
+<img width="200px" src="https://github.com/NSLogxiaoyu3/ZYDatePickerController/blob/master/Screenshots-en.png" />
+<img width="200px" src="https://github.com/NSLogxiaoyu3/ZYDatePickerController/blob/master/Screenshots-zh_Hans.png" />
+<img width="200px" src="https://github.com/NSLogxiaoyu3/ZYDatePickerController/blob/master/Screenshots-zh_Hant.png" />
 
 ## Installation with CocoaPods
 [CocoaPods](http://cocoapods.org/) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries.
