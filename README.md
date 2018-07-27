@@ -1,3 +1,16 @@
+
+<p align="center">
+<img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Passing"/>
+<img src="https://img.shields.io/badge/platform-iOS-brightgreen.svg" alt="Platform: iOS"/>
+<img src="https://img.shields.io/badge/Xcode-9%2B-brightgreen.svg" alt="XCode 9+"/>
+<img src="https://img.shields.io/badge/iOS-9%2B-brightgreen.svg" alt="iOS 9+"/>
+<img src="https://img.shields.io/badge/pod-v1.2-lightr.svg" alt="v1.2"/>
+<img src="https://img.shields.io/badge/licence-MIT-lightgray.svg" alt="Licence MIT"/>
+</a>
+</p>
+
+
+
 # ZYDatePickerController
 
 Just look at the Example and use!
@@ -40,6 +53,16 @@ ZYDatePickerController *datePickController = [[ZYDatePickerController alloc] ini
 ### delegate
 
 the delegate example comes sooner
+
+## Authors
+
+* **iDev_01** - [NSLogxiaoyu3](https://github.com/NSLogxiaoyu3)
+
+## Communication
+
+* If you **found a bug**, open an issue.
+* If you **have a feature request**, open an issue.
+* If you **want to contribute**, submit a pull request.
 
 ## License
 
