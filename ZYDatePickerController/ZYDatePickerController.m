@@ -115,6 +115,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 422);
     self.view.backgroundColor = [UIColor clearColor];
     self.messageLabel.text = self.message;
     [self.view addSubview:self.bodyView];

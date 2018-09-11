@@ -23,14 +23,20 @@
 
 
     UIView *toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
-    toView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 320);
+    toView.frame = CGRectMake(0,
+                              [UIScreen mainScreen].bounds.size.height,
+                              [UIScreen mainScreen].bounds.size.width,
+                              toView.frame.size.height);
     [transitionContext.containerView addSubview:toView];
     [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          bgView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-                         toView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 422, [UIScreen mainScreen].bounds.size.width, 422);
+                         toView.frame = CGRectMake(0,
+                                                   [UIScreen mainScreen].bounds.size.height - toView.frame.size.height,
+                                                   [UIScreen mainScreen].bounds.size.width,
+                                                   toView.frame.size.height);
                      }
                      completion:^(BOOL finished) {
                          [transitionContext completeTransition:finished];
