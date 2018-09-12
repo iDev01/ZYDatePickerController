@@ -40,6 +40,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         self.presentAnimator = [ZYPresentAnimator new];
         self.presentAnimator.delegate = self;
         self.message = message;
+        self.dateFormat = dateFormat;
         self.handler = handler;
         self.bodyView = [[UIView alloc] init];
         self.bodyView.backgroundColor = [UIColor whiteColor];
@@ -69,8 +70,6 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         self.datePicker.layer.cornerRadius = 13;
         self.datePicker.layer.masksToBounds = YES;
         [self.bodyView addSubview:self.datePicker];
-
-
 
         self.confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.confirmButton.layer.cornerRadius = 13;

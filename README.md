@@ -1,13 +1,13 @@
-
 <p align="center">
 <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Passing"/>
 <img src="https://img.shields.io/badge/platform-iOS-brightgreen.svg" alt="Platform: iOS"/>
 <img src="https://img.shields.io/badge/Xcode-9%2B-brightgreen.svg" alt="XCode 9+"/>
 <img src="https://img.shields.io/badge/iOS-9%2B-brightgreen.svg" alt="iOS 9+"/>
-<img src="https://img.shields.io/badge/pod-v1.3-lightr.svg" alt="v1.3"/>
+<img src="https://img.shields.io/badge/pod-1.5-lightr.svg" alt="1.5"/>
 <img src="https://img.shields.io/badge/licence-MIT-lightgray.svg" alt="Licence MIT"/>
 </a>
 </p>
+
 
 
 
