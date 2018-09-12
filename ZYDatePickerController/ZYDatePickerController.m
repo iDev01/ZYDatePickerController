@@ -32,7 +32,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
 
 @implementation ZYDatePickerController
 
-- (instancetype)initWithMessage:(NSString *)message dateFormat:(NSString *)dateFormat handler:(void (^)(NSString *dateString))handler {
+- (instancetype)initWithMessage:(NSString *)message mode:(UIDatePickerMode)mode dateFormat:(NSString *)dateFormat handler:(void (^)(NSString *))handler {
     self = [super init];
     if (self) {
         self.modalPresentationStyle = UIModalPresentationCustom;
@@ -69,6 +69,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         self.datePicker.backgroundColor = [UIColor whiteColor];
         self.datePicker.layer.cornerRadius = 13;
         self.datePicker.layer.masksToBounds = YES;
+        self.datePicker.datePickerMode = mode;
         [self.bodyView addSubview:self.datePicker];
 
         self.confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];

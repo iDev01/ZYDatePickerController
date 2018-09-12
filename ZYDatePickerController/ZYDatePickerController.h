@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) id<DatePickerDelegate> delegate;
 
-- (instancetype)initWithMessage:(NSString *)message dateFormat:(NSString *)dateFormat handler:(void (^)(NSString *dateString))handler;
+- (instancetype)initWithMessage:(NSString *)message mode:(UIDatePickerMode)mode dateFormat:(NSString *)dateFormat handler:(void (^)(NSString *dateString))handler;
 
 - (void)setDate:(NSDate *)date;
 
