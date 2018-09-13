@@ -14,7 +14,7 @@
 
 typedef void(^DatePickerHandler)(NSString *dateString);
 
-@interface ZYDatePickerController ()<UIViewControllerTransitioningDelegate, PresentAnimatorDelegate>
+@interface ZYDatePickerController ()<UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) UIView *bodyView;
 @property (strong, nonatomic) UILabel *messageLabel;
@@ -38,7 +38,6 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         self.modalPresentationStyle = UIModalPresentationCustom;
         self.transitioningDelegate = self;
         self.presentAnimator = [ZYPresentAnimator new];
-        self.presentAnimator.delegate = self;
         self.message = message;
         self.dateFormat = dateFormat;
         self.handler = handler;
@@ -79,7 +78,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         [self.confirmButton setBackgroundColor:[UIColor whiteColor]];
         [self.confirmButton setTitleColor:[UIColor colorWithRed:0 green:0.478 blue:1 alpha:1] forState:UIControlStateNormal];
         [self.confirmButton setTitle:[NSBundle zy_localizedStringForKey:@"confirm"]  forState:UIControlStateNormal];
-        [self.confirmButton addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
+        [self.confirmButton addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
         self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.cancelButton.layer.cornerRadius = 13;
         self.cancelButton.layer.masksToBounds = YES;
@@ -87,7 +86,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         [self.cancelButton setBackgroundColor:[UIColor whiteColor]];
         [self.cancelButton setTitleColor:[UIColor colorWithRed:0 green:0.478 blue:1 alpha:1] forState:UIControlStateNormal];
         [self.cancelButton setTitle:[NSBundle zy_localizedStringForKey:@"cancel"]  forState:UIControlStateNormal];
-        [self.cancelButton addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+        [self.cancelButton addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
 
         [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.and.right.equalTo(self.bodyView);
@@ -115,7 +114,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 422);
+    self.view.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 422, [UIScreen mainScreen].bounds.size.width, 422);
     self.view.backgroundColor = [UIColor clearColor];
     self.messageLabel.text = self.message;
     [self.view addSubview:self.bodyView];
@@ -163,7 +162,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
     self.datePicker.date = date;
 }
 
-- (void)confirm {
+- (void)confirm:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = self.dateFormat ?: @"yyyy-MM-dd";
     NSString *birthday = [dateFormatter stringFromDate:self.datePicker.date];
@@ -172,10 +171,10 @@ typedef void(^DatePickerHandler)(NSString *dateString);
     } else if (self.delegate) {
         [self.delegate datePickerController:self didClickConfirmButtonWithDateString:birthday];
     }
-    [self cancel];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)cancel {
+- (void)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -195,10 +194,6 @@ typedef void(^DatePickerHandler)(NSString *dateString);
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
     return self.presentAnimator;
-}
-
-- (void)didTapEmptyArea {
-    [self cancel];
 }
 
 @end

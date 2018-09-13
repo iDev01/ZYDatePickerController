@@ -8,6 +8,12 @@
 
 #import "ZYPresentAnimator.h"
 
+@interface ZYPresentAnimator()
+
+@property (strong, nonatomic) UIViewController *toViewController;
+
+@end
+
 @implementation ZYPresentAnimator
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
@@ -20,23 +26,19 @@
     [transitionContext.containerView addSubview:bgView];
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [bgView addGestureRecognizer:tapGR];
-
-
+    self.toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
-    toView.frame = CGRectMake(0,
-                              [UIScreen mainScreen].bounds.size.height,
-                              [UIScreen mainScreen].bounds.size.width,
-                              toView.frame.size.height);
+    CGRect storeFrame = toView.frame;
+    CGRect frame = toView.frame;
+    frame.origin.y = [UIScreen mainScreen].bounds.size.height;
+    toView.frame = frame;
     [transitionContext.containerView addSubview:toView];
     [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          bgView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-                         toView.frame = CGRectMake(0,
-                                                   [UIScreen mainScreen].bounds.size.height - toView.frame.size.height,
-                                                   [UIScreen mainScreen].bounds.size.width,
-                                                   toView.frame.size.height);
+                         toView.frame = storeFrame;
                      }
                      completion:^(BOOL finished) {
                          [transitionContext completeTransition:finished];
@@ -44,9 +46,7 @@
 }
 
 - (void)tap:(UITapGestureRecognizer *)tapGestureRecognizer {
-    if (self.delegate) {
-        [self.delegate didTapEmptyArea];
-    }
+    [self.toViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

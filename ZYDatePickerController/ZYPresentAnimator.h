@@ -9,18 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@protocol PresentAnimatorDelegate;
-
 @interface ZYPresentAnimator : NSObject<UIViewControllerAnimatedTransitioning>
 
 @property (strong, nonatomic) UIView *backgroundView;
-
-@property (weak, nonatomic) id<PresentAnimatorDelegate>delegate;
-
-@end
-
-@protocol PresentAnimatorDelegate
-
-- (void)didTapEmptyArea;
 
 @end

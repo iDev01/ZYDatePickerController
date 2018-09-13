@@ -21,10 +21,9 @@
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         fromView.frame = CGRectMake(0,
-                                                     [UIScreen mainScreen].bounds.size.height,
-                                                     [UIScreen mainScreen].bounds.size.width,
-                                                     fromView.frame.size.height);
+                         CGRect frame = fromView.frame;
+                         frame.origin.y = [UIScreen mainScreen].bounds.size.height;
+                         fromView.frame = frame;
                          bgView.backgroundColor = [UIColor clearColor];
                      }
                      completion:^(BOOL finished) {
