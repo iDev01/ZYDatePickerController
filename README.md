@@ -56,7 +56,7 @@ the delegate example comes sooner
 
 ## Authors
 
-* **iDev_01** - [NSLogxiaoyu3](https://github.com/iDev01)
+* **iDev_01** - [iDev01](https://github.com/iDev01)
 
 ## Communication
 
