@@ -32,7 +32,10 @@ typedef void(^DatePickerHandler)(NSString *dateString);
 
 @implementation ZYDatePickerController
 
-- (instancetype)initWithMessage:(NSString *)message mode:(UIDatePickerMode)mode dateFormat:(NSString *)dateFormat handler:(void (^)(NSString *))handler {
+- (instancetype)initWithMessage:(NSString *)message
+                           mode:(UIDatePickerMode)mode
+                     dateFormat:(NSString *)dateFormat
+                        handler:(void (^)(NSString *))handler {
     self = [super init];
     if (self) {
         self.modalPresentationStyle = UIModalPresentationCustom;
@@ -61,7 +64,6 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         [self.bodyView addSubview:lineView1];
 
         self.datePicker = [[UIDatePicker alloc] init];
-        self.datePicker.datePickerMode = UIDatePickerModeDate;
         self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSince1970:-3786854400];
         self.datePicker.maximumDate = [NSDate date];
         self.datePicker.date = self.datePicker.minimumDate;
@@ -69,6 +71,92 @@ typedef void(^DatePickerHandler)(NSString *dateString);
         self.datePicker.layer.cornerRadius = 13;
         self.datePicker.layer.masksToBounds = YES;
         self.datePicker.datePickerMode = mode;
+        if (@available(iOS 13.4, *)) {
+            self.datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        }
+        [self.bodyView addSubview:self.datePicker];
+
+        self.confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.confirmButton.layer.cornerRadius = 13;
+        self.confirmButton.layer.masksToBounds = YES;
+        self.confirmButton.titleLabel.font = [UIFont fontWithName:@".SFUIDisplay" size:20];
+        [self.confirmButton setBackgroundColor:[UIColor whiteColor]];
+        [self.confirmButton setTitleColor:[UIColor colorWithRed:0 green:0.478 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.confirmButton setTitle:[NSBundle zy_localizedStringForKey:@"confirm"]  forState:UIControlStateNormal];
+        [self.confirmButton addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
+        self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.cancelButton.layer.cornerRadius = 13;
+        self.cancelButton.layer.masksToBounds = YES;
+        self.cancelButton.titleLabel.font = [UIFont fontWithName:@".SFUIDisplay-Semibold" size:20];
+        [self.cancelButton setBackgroundColor:[UIColor whiteColor]];
+        [self.cancelButton setTitleColor:[UIColor colorWithRed:0 green:0.478 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.cancelButton setTitle:[NSBundle zy_localizedStringForKey:@"cancel"]  forState:UIControlStateNormal];
+        [self.cancelButton addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+
+        [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.and.right.equalTo(self.bodyView);
+            make.height.mas_equalTo(44);
+        }];
+
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.messageLabel.mas_bottom);
+            make.left.and.right.equalTo(self.bodyView);
+            make.height.mas_equalTo(1 / 3.0);
+        }];
+
+        [lineView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(lineView);
+        }];
+
+        [self.datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lineView.mas_bottom);
+            make.left.right.and.bottom.equalTo(self.bodyView);
+        }];
+    }
+    return self;
+}
+
+- (instancetype)initWithMessage:(NSString *)message
+                           mode:(UIDatePickerMode)mode
+       preferredDatePickerStyle:(UIDatePickerStyle)preferredDatePickerStyle
+                     dateFormat:(NSString *)dateFormat
+                        handler:(void (^)(NSString *))handler  API_AVAILABLE(ios(13.4)){
+    self = [super init];
+    if (self) {
+        self.modalPresentationStyle = UIModalPresentationCustom;
+        self.transitioningDelegate = self;
+        self.presentAnimator = [ZYPresentAnimator new];
+        self.message = message;
+        self.dateFormat = dateFormat;
+        self.handler = handler;
+        self.bodyView = [[UIView alloc] init];
+        self.bodyView.backgroundColor = [UIColor whiteColor];
+        self.bodyView.layer.cornerRadius = 13;
+        self.bodyView.layer.masksToBounds = YES;
+
+        self.messageLabel = [[UILabel alloc] init];
+        self.messageLabel.textColor = [UIColor colorWithWhite:0.56 alpha:1];
+        self.messageLabel.font = [UIFont fontWithName:@".SFUIDisplay" size:13];
+        self.messageLabel.textAlignment = NSTextAlignmentCenter;
+        [self.bodyView addSubview:self.messageLabel];
+
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
+        [self.bodyView addSubview:lineView];
+
+        UIView *lineView1 = [[UIView alloc] init];
+        lineView1.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0.31 alpha:0.05];
+        [self.bodyView addSubview:lineView1];
+
+        self.datePicker = [[UIDatePicker alloc] init];
+        self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSince1970:-3786854400];
+        self.datePicker.maximumDate = [NSDate date];
+        self.datePicker.date = self.datePicker.minimumDate;
+        self.datePicker.backgroundColor = [UIColor whiteColor];
+        self.datePicker.layer.cornerRadius = 13;
+        self.datePicker.layer.masksToBounds = YES;
+        self.datePicker.datePickerMode = mode;
+        self.datePicker.preferredDatePickerStyle = preferredDatePickerStyle;
         [self.bodyView addSubview:self.datePicker];
 
         self.confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
