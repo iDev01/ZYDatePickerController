@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'ZYDatePickerController'
   s.version = '1.7'
-  s.platform = :ios, '11.4'
+  s.platform = :ios, '14.2'
   s.license = { :type => "MIT", :file => "LICENSE" }
   s.summary = 'A DatePickController that likes the UIAlertController.'
   s.homepage = 'https://github.com/NSLogxiaoyu3/ZYDatePickerController'
