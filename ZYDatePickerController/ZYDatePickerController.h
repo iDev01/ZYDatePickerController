@@ -18,6 +18,10 @@
 
 - (void)setDate:(NSDate *)date;
 
+- (void)setMinimumDate:(NSDate *)date;
+
+- (void)setMaximumDate:(NSDate *)date;
+
 @end
 
 @protocol DatePickerDelegate

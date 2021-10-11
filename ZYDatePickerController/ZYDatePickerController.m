@@ -250,6 +250,20 @@ typedef void(^DatePickerHandler)(NSString *dateString);
     self.datePicker.date = date;
 }
 
+- (void)setMinimumDate:(NSDate *)date {
+    if (date == nil) {
+        return;
+    }
+    self.datePicker.minimumDate = date;
+}
+
+- (void)setMaximumDate:(NSDate *)date {
+    if (date == nil) {
+        return;
+    }
+    self.datePicker.maximumDate = date;
+}
+
 - (void)confirm:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = self.dateFormat ?: @"yyyy-MM-dd";
