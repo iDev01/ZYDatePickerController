@@ -12,7 +12,7 @@
 #import <Masonry/Masonry.h>
 #import "NSBundle+ZYDatePickerController.h"
 
-typedef void(^DatePickerHandler)(NSString *dateString);
+typedef void(^DatePickerHandler)(NSDate *date, NSString *dateString);
 
 @interface ZYDatePickerController ()<UIViewControllerTransitioningDelegate>
 
@@ -32,10 +32,14 @@ typedef void(^DatePickerHandler)(NSString *dateString);
 
 @implementation ZYDatePickerController
 
+- (instancetype)initWithMessage:(NSString *)message mode:(UIDatePickerMode)mode dateFormat:(NSString *)dateFormat {
+    return [[ZYDatePickerController alloc] initWithMessage:message mode:mode dateFormat:dateFormat handler:nil];
+}
+
 - (instancetype)initWithMessage:(NSString *)message
                            mode:(UIDatePickerMode)mode
                      dateFormat:(NSString *)dateFormat
-                        handler:(void (^)(NSString *))handler {
+                        handler:(void (^)(NSDate *, NSString *))handler {
     self = [super init];
     if (self) {
         self.modalPresentationStyle = UIModalPresentationCustom;
@@ -120,7 +124,7 @@ typedef void(^DatePickerHandler)(NSString *dateString);
                            mode:(UIDatePickerMode)mode
        preferredDatePickerStyle:(UIDatePickerStyle)preferredDatePickerStyle
                      dateFormat:(NSString *)dateFormat
-                        handler:(void (^)(NSString *))handler  API_AVAILABLE(ios(13.4)){
+                        handler:(void (^)(NSDate *, NSString *))handler  API_AVAILABLE(ios(13.4)){
     self = [super init];
     if (self) {
         self.modalPresentationStyle = UIModalPresentationCustom;
@@ -267,11 +271,16 @@ typedef void(^DatePickerHandler)(NSString *dateString);
 - (void)confirm:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = self.dateFormat ?: @"yyyy-MM-dd";
-    NSString *birthday = [dateFormatter stringFromDate:self.datePicker.date];
+    NSString *dateString = [dateFormatter stringFromDate:self.datePicker.date];
     if (self.handler) {
-        self.handler(birthday);
+        self.handler(self.datePicker.date, dateString);
     } else if (self.delegate) {
-        [self.delegate datePickerController:self didClickConfirmButtonWithDateString:birthday];
+        if ([self.delegate respondsToSelector:@selector(datePickerController:didConfirmWithDate:formatDateString:)]) {
+            [self.delegate datePickerController:self didConfirmWithDate:self.datePicker.date formatDateString:dateString];
+        }
+        if ([self.delegate respondsToSelector:@selector(datePickerController:didClickConfirmButtonWithDateString:)]) {
+            [self.delegate datePickerController:self didClickConfirmButtonWithDateString:dateString];
+        }
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -12,9 +12,11 @@
 
 @interface ZYDatePickerController : UIViewController
 
-@property (strong, nonatomic) id<DatePickerDelegate> delegate;
+@property (weak, nonatomic) id<DatePickerDelegate> delegate;
 
-- (instancetype)initWithMessage:(NSString *)message mode:(UIDatePickerMode)mode dateFormat:(NSString *)dateFormat handler:(void (^)(NSString *dateString))handler;
+- (instancetype)initWithMessage:(NSString *)message mode:(UIDatePickerMode)mode dateFormat:(NSString *)dateFormat;
+
+- (instancetype)initWithMessage:(NSString *)message mode:(UIDatePickerMode)mode dateFormat:(NSString *)dateFormat handler:(void (^)(NSDate *date, NSString *dateString))handler;
 
 - (void)setDate:(NSDate *)date;
 
@@ -24,9 +26,12 @@
 
 @end
 
-@protocol DatePickerDelegate
+@protocol DatePickerDelegate <NSObject>
 
 @optional
+
+- (void)datePickerController:(ZYDatePickerController *)datePickerController didConfirmWithDate:(NSDate *)date formatDateString:(NSString *)dateString;
+
 - (void)datePickerController:(ZYDatePickerController *)datePickerController didClickConfirmButtonWithDateString:(NSString *)dateString;
 
 @end
